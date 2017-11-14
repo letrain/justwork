@@ -6,3 +6,52 @@ CREATE TABLE `enuminfo` (
 	`comment` VARCHAR(50) NULL DEFAULT NULL,
 	PRIMARY KEY (`id`) USING BTREE
 )
+
+CREATE TABLE `cp_history` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`no` VARCHAR(255) NULL DEFAULT NULL COMMENT '开奖期号',
+	`before_nums` VARCHAR(120) NULL DEFAULT NULL COMMENT '审核前开奖普通号码',
+	`before_specialnums` VARCHAR(50) NULL DEFAULT NULL COMMENT '审核前特殊号码',
+	`after_nums` VARCHAR(120) NULL DEFAULT NULL COMMENT '审核后普通号码',
+	`after_specialnums` VARCHAR(50) NULL DEFAULT NULL COMMENT '审核后特殊号码',
+	`money` DECIMAL(20,0) NULL DEFAULT NULL COMMENT '奖池奖金',
+	`createtime` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`opendate` DATETIME NULL DEFAULT NULL COMMENT '开奖具体时间',
+	`status` CHAR(1) NULL DEFAULT '0' COMMENT '\'0\'-未审核,\'1\'-已审核',
+	`img` VARCHAR(255) NULL DEFAULT NULL,
+	`userid` INT(10) NULL DEFAULT NULL COMMENT '彩票录入人员id',
+	`audit_userid` INT(11) NULL DEFAULT NULL COMMENT '审核人员id',
+	`comment` VARCHAR(255) NULL DEFAULT NULL,
+	`audittime` TIMESTAMP NULL DEFAULT NULL COMMENT '审核时间',
+	`typeid` INT(11) NULL DEFAULT '80' COMMENT '外键关联cptype',
+	`platform` VARCHAR(50) NULL DEFAULT NULL COMMENT '开奖平台,cpk,spider',
+	PRIMARY KEY (`id`),
+	INDEX `typeid_index` (`typeid`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=161138
+;
+
+CREATE TABLE `cplatest` (
+	`id` MEDIUMINT(10) NOT NULL AUTO_INCREMENT,
+	`typeid` INT(10) NULL DEFAULT NULL COMMENT 'cptype的外键',
+	`no` VARCHAR(50) NULL DEFAULT NULL COMMENT '开奖期号',
+	`nums` VARCHAR(120) NULL DEFAULT NULL COMMENT '开奖普通号码',
+	`specialnums` VARCHAR(100) NULL DEFAULT NULL,
+	`createtime` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+	`opendate` DATETIME NULL DEFAULT NULL COMMENT '开奖日期',
+	`img` VARCHAR(255) NULL DEFAULT NULL,
+	`status` CHAR(1) NULL DEFAULT '0' COMMENT '\'0\'-未审核,\'1\'-已审核',
+	`money` DECIMAL(20,0) NULL DEFAULT NULL COMMENT '奖池奖金',
+	`comment` VARCHAR(255) NULL DEFAULT NULL,
+	`newno` INT(11) NULL DEFAULT NULL COMMENT '最新一期是当天的第几期',
+	`nextno` INT(11) NULL DEFAULT NULL COMMENT '下一期',
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `typeid_index` (`typeid`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+ROW_FORMAT=COMPACT
+AUTO_INCREMENT=80
+;
