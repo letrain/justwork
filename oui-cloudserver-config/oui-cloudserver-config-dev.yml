@@ -1,7 +1,25 @@
 server:
   port: 8650
 spring:
+  profiles: dev
   application:
     name: oui-cloudserver-config-dev
-  profiles:
-    active: dev
+  cloud:
+    config:
+      profile: dev
+      server:
+        svn:
+          uri: https://github.com/letrain/justwork
+          username: letrain47@outlook.com
+          password: Hwj38121
+          search-paths: '{application}'
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://172.16.69.130:8700/eureka/,http://172.16.69.129:8700/eureka/
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-expiration-duration-in-seconds: 15  #续约更新时间间隔
+    lease-renewal-interval-in-seconds: 5      #续约到期时间
