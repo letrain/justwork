@@ -1,0 +1,5 @@
+server:
+  port: 8650
+spring:
+  application:
+    name: oui-cloudserver-config-dev
