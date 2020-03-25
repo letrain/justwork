@@ -3,3 +3,5 @@ server:
 spring:
   application:
     name: oui-cloudserver-config-dev
+  profiles:
+    active: dev
