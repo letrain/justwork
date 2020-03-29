@@ -1,0 +1,8 @@
+## 加密
+encrypt:
+  key: oui472279112hwj
+  key-store:
+    location: config-server.keystore
+    alias: config-server
+    password: letrain
+    secret: letrain

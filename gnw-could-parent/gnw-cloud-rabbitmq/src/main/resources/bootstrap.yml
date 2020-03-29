@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: gnw-cloud-rabbitmq
+  cloud:
+    config:
+      discovery:
+        service-id: gnw-cloud-config
+        enabled: true
+      profile: dev
+      username: user #config服务设置了安全
+      password: letrain470
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: letrain
+    password: 123456
+server:
+  port: 8610
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9800/eureka/
+  instance:
+    prefer-ip-address: true
+    # 2.0版本以上的要改成 ip-address   以下的是 ipAddress
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 15 #服务刷新时间配置
+    lease-expiration-duration-in-seconds: 30 #服务过期时间配置
+
+---
+spring:
+  profiles: dev
+  cloud:
+    config:
+      profile: dev
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9800/eureka/
+
+---
+spring:
+  profiles: test
+  cloud:
+    config:
+      profile: test
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9800/eureka/
+
+---
+spring:
+  profiles: prod
+  cloud:
+    config:
+      profile: prod
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9800/eureka/

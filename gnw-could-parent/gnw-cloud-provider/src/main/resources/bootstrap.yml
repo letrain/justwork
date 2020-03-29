@@ -1,0 +1,77 @@
+server:
+  port: 8760
+spring:
+  application:
+    name: gnw-cloud-provider
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+  cloud:
+    config:
+#      profile: test #必须值
+      label: master #必须值
+#      uri: http://localhost:9700/ #必须值 config服务的地址
+      username: user #config服务设置了安全
+      password: letrain470
+      discovery:
+        service-id: gnw-cloud-config
+        enabled: true # 开启通过服务名来查找
+      fail-fast: true # 失败快速响应， 开启 （在网络波动的时候，这个代价很高，直接服务关闭了）
+      ## pom引入 spring-retry 和 starter-aop 开启重试机制 6次
+      retry:
+        multiplier: 1.5 #初始重试间隔 单位秒
+        initial-interval: 1000  # 下一间隔的乘数
+        max-attempts: 7 # 最大重试次数， 默认6次
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:9800/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 10 #服务刷新时间配置，每隔这个时间会主动心跳一次，默认30s
+    lease-expiration-duration-in-seconds: 15 #服务过期时间配置,超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除
+    prefer-ip-address: true
+    # 2.0版本以上的要改成 ip-address   以下的是 ipAddress
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+
+
+oui: hwj
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,health,info
+---
+spring:
+  profiles: dev
+  cloud:
+    config:
+      profile: dev
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:9800/eureka/
+
+---
+spring:
+  profiles: test
+  cloud:
+    config:
+      profile: test
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:9800/eureka/
+
+---
+spring:
+  profiles: prod
+  cloud:
+    config:
+      profile: prod
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:9800/eureka/
+

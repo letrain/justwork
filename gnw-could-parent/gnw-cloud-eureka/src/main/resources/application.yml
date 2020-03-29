@@ -1,0 +1,16 @@
+
+server:
+  port: 9600
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    # 是否注册到服务
+    register-with-eureka: false
+    # 不注册
+    fetch-registry: false
+    service-url:
+      default-Zone: http://${eureka.instance.hostname}:${server.port}/eureka/
+spring:
+  application:
+    name: gnw-cloud-eureka
