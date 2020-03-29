@@ -23,6 +23,7 @@ spring:
         multiplier: 1.5 #初始重试间隔 单位秒
         initial-interval: 1000  # 下一间隔的乘数
         max-attempts: 7 # 最大重试次数， 默认6次
+
   rabbitmq:
     host: localhost
     port: 5672

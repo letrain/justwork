@@ -13,10 +13,10 @@ spring:
           search-paths: '{application}'
         #  basedir:   # 本地仓库地址， 临时目录地址
       label: master   #仓库的分支
-  security:
-    user:
-      name: user
-      password: letrain470
+#  security:
+#    user:
+#      name: user
+#      password: letrain470
   rabbitmq:
     host: localhost
     port: 5672
