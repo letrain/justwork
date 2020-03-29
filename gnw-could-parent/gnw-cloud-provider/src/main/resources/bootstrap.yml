@@ -23,6 +23,11 @@ spring:
         multiplier: 1.5 #初始重试间隔 单位秒
         initial-interval: 1000  # 下一间隔的乘数
         max-attempts: 7 # 最大重试次数， 默认6次
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: letrain
+    password: 123456
 
 eureka:
   client:
@@ -34,14 +39,13 @@ eureka:
     prefer-ip-address: true
     # 2.0版本以上的要改成 ip-address   以下的是 ipAddress
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
-
-
-oui: hwj
 management:
   endpoints:
     web:
       exposure:
-        include: refresh,health,info
+        ##  curl -X POST http://localhost:8780/actuator/bus-refresh 刷新配置
+        include: refresh,health,info,bus-refresh
+oui: hwj
 ---
 spring:
   profiles: dev

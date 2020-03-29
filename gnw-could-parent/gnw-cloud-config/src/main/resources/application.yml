@@ -17,6 +17,11 @@ spring:
     user:
       name: user
       password: letrain470
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: letrain
+    password: 123456
 server:
   port: 9700
 eureka:
@@ -29,3 +34,8 @@ eureka:
     prefer-ip-address: true
     # 2.0版本以上的要改成 ip-address   以下的是 ipAddress
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh,health,info
