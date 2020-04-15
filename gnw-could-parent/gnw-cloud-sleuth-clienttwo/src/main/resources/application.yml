@@ -1,17 +1,18 @@
+
 server:
-  port: 8760
+  port: 8950
 spring:
   application:
-    name: gnw-cloud-provider
+    name: gnw-cloud-sleuth-clienttwo
   redis:
     host: 127.0.0.1
     port: 6379
     password:
   cloud:
     config:
-#      profile: test #必须值
+      #      profile: test #必须值
       label: master #必须值
-#      uri: http://localhost:9700/ #必须值 config服务的地址
+      #      uri: http://localhost:9700/ #必须值 config服务的地址
       username: user #config服务设置了安全
       password: letrain470
       discovery:
@@ -23,16 +24,21 @@ spring:
         multiplier: 1.5 #初始重试间隔 单位秒
         initial-interval: 1000  # 下一间隔的乘数
         max-attempts: 7 # 最大重试次数， 默认6次
-    bus:
-      trace:
-        enabled: true # 开启trace跟踪记录信息
-      enabled: true #是否连接到消息总线，默认true
 
   rabbitmq:
     host: localhost
     port: 5672
     username: letrain
     password: 123456
+  sleuth:
+    sampler:
+      probability: 1 # 0.1表示收集10%的请求跟踪信息
+    trace-id128: true
+  zipkin:
+    sender:
+      type: rabbit
+
+
 
 eureka:
   client:
@@ -51,6 +57,7 @@ management:
         ##  curl -X POST http://localhost:8780/actuator/bus-refresh 刷新配置
         include: refresh,health,info,bus-refresh
 oui: hwj
+
 ---
 spring:
   profiles: dev
@@ -83,4 +90,5 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://127.0.0.1:9800/eureka/
+
 

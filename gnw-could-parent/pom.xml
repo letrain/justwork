@@ -25,6 +25,8 @@
         <module>gnw-cloud-provider</module>
         <module>gnw-cloud-config</module>
         <module>gnw-cloud-rabbitmq</module>
+        <module>gnw-cloud-sleuth-clientone</module>
+        <module>gnw-cloud-sleuth-clienttwo</module>
     </modules>
 
     <dependencies>
