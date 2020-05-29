@@ -24,6 +24,7 @@ public class PrintController {
     public String doPrint(@RequestBody String printInfo){
         return printService.doPrint(printInfo);
     }
+
     @RequestMapping("/index")
     @ResponseBody
     public String index(String printInfo){

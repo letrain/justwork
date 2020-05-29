@@ -1,6 +1,8 @@
 package com.ylzinfo.print_recipe.service.print.base;
 
 import com.sun.jna.Native;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author zengxiang
@@ -8,17 +10,18 @@ import com.sun.jna.Native;
  * @desc
  **/
 public class Clibrary  {
-
     private IClibrary INSTANCE;
 
     private Clibrary(){
-        System.out.println("加载dll文件");
-        //INSTANCE = (IClibrary) Native.loadLibrary(("E:\\job\\互联网医院接口\\福建省机关医院\\PrinterTestV2019121601\\PrinterTool.dll"), IClibrary.class);
-        INSTANCE = (IClibrary) Native.loadLibrary(("/seyy/PrinterTool.dll"), IClibrary.class);
+        Logger logger = LoggerFactory.getLogger(Clibrary.class);
+        logger.info("加载dll文件=====》开始");
+        INSTANCE = Native.load("/seyy/PrinterTool.dll", IClibrary.class);
+        logger.info("加载dll文件=====》成功");
     }
     public IClibrary getIClibrary(){
         return INSTANCE;
     }
+
     public static Clibrary newClibrary(){
         return new  Clibrary();
     }

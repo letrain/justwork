@@ -9,8 +9,5 @@ import com.sun.jna.Native;
  * @desc 调用动态库
  **/
 public interface IClibrary extends Library {
-    ;
-    //IClibrary INSTANCE = (IClibrary) Native.loadLibrary(("D:\\printConfig\\PrinterTool.dll"),IClibrary.class);//展厅环境打印配置
     char PrintRecipe(int type,  String pindata, String poutdata);
-
 }

@@ -1,6 +1,8 @@
 package com.ylzinfo.print_recipe.service.print;
 
 import com.ylzinfo.print_recipe.service.print.base.Clibrary;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,20 +14,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PrintService {
+    private Logger logger = LoggerFactory.getLogger(PrintService.class);
 
     @Autowired
     private Clibrary INSTANCE;
 
     public String doPrint(String input) {
-        String err = "";
-
-        System.out.println("Input:\n" + input);
+        String output = "";
+        logger.info("Input:{}", input);
         try {
-            char e = INSTANCE.getIClibrary().PrintRecipe(2,input, err);
-            System.out.println("Output:\n" + err);
-            System.out.println("e:\n" + e);
+            char res = INSTANCE.getIClibrary().PrintRecipe(2,input, output);
+            logger.info("Output:{}",output);
+            logger.info("res:{}", res);
         } catch (Exception e) {
-            System.out.println("打印失败！");
+            logger.info("打印失败！", e);
             return "false";
         }
         return "true";

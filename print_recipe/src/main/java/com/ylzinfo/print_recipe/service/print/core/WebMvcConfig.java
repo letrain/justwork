@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class WebMvcConfig {
-
     @Bean
     public Clibrary getClibraryBean(){
         return  Clibrary.newClibrary();
