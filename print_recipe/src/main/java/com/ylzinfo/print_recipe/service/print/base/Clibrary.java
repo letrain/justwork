@@ -15,7 +15,8 @@ public class Clibrary  {
     private Clibrary(){
         Logger logger = LoggerFactory.getLogger(Clibrary.class);
         logger.info("加载dll文件=====》开始");
-        INSTANCE = Native.load("/seyy/PrinterTool.dll", IClibrary.class);
+//        INSTANCE = Native.load("/jgyy/PrinterTool64.dll", IClibrary.class);
+        INSTANCE = Native.load("/seyy/PrinterTool64.dll", IClibrary.class);
         logger.info("加载dll文件=====》成功");
     }
     public IClibrary getIClibrary(){
