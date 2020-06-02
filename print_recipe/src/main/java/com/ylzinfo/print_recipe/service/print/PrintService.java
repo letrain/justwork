@@ -4,6 +4,7 @@ import com.ylzinfo.print_recipe.service.print.base.Clibrary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,12 +19,14 @@ public class PrintService {
 
     @Autowired
     private Clibrary INSTANCE;
+    @Value("${recipeType}")
+    private int recipeType;
 
     public String doPrint(String input) {
         String output = "";
         logger.info("Input:{}", input);
         try {
-            char res = INSTANCE.getIClibrary().PrintRecipe(2,input, output);
+            char res = INSTANCE.getIClibrary().PrintRecipe(recipeType, input, output);
             logger.info("Output:{}",output);
             logger.info("res:{}", res);
         } catch (Exception e) {
